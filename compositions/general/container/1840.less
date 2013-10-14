@@ -1,0 +1,28 @@
+//
+// 1840.less
+//
+// created: 5.5.2012
+// author: Petr Juna
+//
+// SWITCHERS: @nav-position, @aside-position, GRID
+//
+
+.container1840(@_,@_) {
+
+}
+
+.container1840 (right,left) {
+    .column(14);
+}
+
+.container1840 (top,top){
+    .column(23);
+    margin-top:1em;
+    display: inline;
+    float:left;
+}
+
+.container1840 (right,false) { .column(20); }
+.container1840 (right, right) {
+    .column (20);
+}

@@ -1,0 +1,21 @@
+//
+// Composition
+//
+
+.composition(flexible) {
+    @import "helpers";
+    @import "flexible/init";
+    @import "composer";
+
+    // STANIOL - CORE COMPOSER
+    // .composer << ./core/composer.less
+    // Main mixin that compose whole STANIOL. It's Start point.
+
+    .composer;
+}
+
+.composition(false) { }
+
+// Initialize composition
+
+.composition(@composition);

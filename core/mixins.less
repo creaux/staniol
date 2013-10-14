@@ -1,0 +1,74 @@
+
+//
+// Dummy represent scale model of specificaly sized image
+// Mixin is base on popular http://placehold.it/ solution
+// arguments: width, height
+// data: int, int
+//
+
+.dummy(@width, @height) {
+    background: url("http://placehold.it/@{width}x@{height}");
+    width: @width*1px;
+    height: @height*1px;
+    display: block;
+}
+
+//
+// Clearfix
+// The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/
+//
+
+.clearfix() {
+    *zoom:1;
+
+    &:before,
+    &:after {
+        content:"";
+        display:table;
+    }
+    &:after {
+        clear:both;
+    }
+}
+
+//
+// Border
+// Setting border via mixin with predefined color and styles
+// @border-width, @border-type, @border-color
+//
+
+// Border top
+.border-top(@width:@border-width, @type:@border-type, @color:@border-color) {
+    border-top: @width*1px @type @color;
+}
+
+// Border right
+.border-right(@width:@border-width, @type:@border-type, @color:@border-color) {
+    border-right: @width*1px @type @color;
+}
+
+// Border bottom
+.border-bottom(@width:@border-width, @type:@border-type, @color:@border-color) {
+    border-bottom: @width*1px @type @color;
+}
+
+// Border left
+.border-left(@width:@border-width, @type:@border-type, @color:@border-color) {
+    border-left: @width*1px @type @color;
+}
+
+// Border
+.border(@width:@border-width, @type:@border-type, @color:@border-color) {
+    border: @width*1px @type @color;
+}
+
+// Fonts
+// Font family
+//
+//
+
+.font-family(@font-family:@font-family) {
+    font-family:@font-family;
+}
+
+//

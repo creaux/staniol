@@ -1,0 +1,35 @@
+.header-ticker(960, @min-width) {
+    .header960(@nav-position, @aside-position);
+}
+
+.header-ticker(responsive, @min-width) when (@min-width >= 960px) and (@min-width =< 1199px) {
+    .header960(@nav-position, @aside-position);
+}
+
+.header-ticker(1200, @min-width) {
+    .header1200(@nav-position, @aside-position);
+}
+
+.header-ticker(responsive, @min-width) when (@min-width >= 1200px) {
+    .header1200(@nav-position, @aside-position);
+}
+
+.header-ticker(1520, @min-width) {
+    .header1520(@nav-position, @aside-position);
+}
+
+.header-ticker(responsive, @min-width) when (@min-width >= 1520px) {
+    .header1520(@nav-position, @aside-position);
+}
+
+.header-ticker(1840, @min-width) {
+    .header1840(@nav-position, @aside-position);
+}
+
+.header-ticker(responsive, @min-width) when (@min-width >= 1840px) {
+    .header1840(@nav-position, @aside-position);
+}
+
+.header-ticker(@_, @min-width){
+    .header(@nav-position, @aside-position);
+}

@@ -1,0 +1,28 @@
+//@TODO: Nadefinovat @nav-position: top, left, right. Auto je hotové.
+
+// @nav-position:auto;
+
+.pagewrap1200 (@_,@_) {
+    width:1200px;
+}
+
+.pagewrap1200 (auto,@_) {
+    padding:0;
+}
+
+
+.pagewrap1200 (auto,right) {
+    position: relative;
+}
+
+.pagewrap1200 (left,right) {
+    position: relative;
+}
+
+.pagewrap1200 (auto,false) {
+    position: relative;
+}
+
+.pagewrap1200 (left,false) {
+    position: relative;
+}

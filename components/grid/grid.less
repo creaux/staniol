@@ -1,0 +1,81 @@
+//
+// Based on Semantic.gs http://semantic.gs/
+//
+
+//
+// Mixins
+//
+
+.row(@columns:@columns) {
+    display: block;
+    width: @total-width*((@gutter-width + @gridsystem-width)/@gridsystem-width);
+    margin: 0 @total-width*(((@gutter-width*.5)/@gridsystem-width)*-1);
+    .clearfix;
+}
+.column(@x,@columns:@columns) {
+    display: inline;
+    float: left;
+    width: @total-width*((((@gutter-width+@column-width)*@x)-@gutter-width) / @gridsystem-width);
+    margin: 0 @total-width*((@gutter-width*.5)/@gridsystem-width);
+}
+.push(@offset:1) {
+    margin-left: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);
+}
+.pull(@offset:1) {
+    margin-right: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);
+}
+
+//
+// Classes
+// These classes can be used throught HTML
+//
+
+body {
+    width: 100%;
+    .clearfix;
+}
+
+.row { .row; }
+
+// Grid system with 12 columns
+.col-1 { .column(1); }
+.col-2 { .column(2); }
+.col-3 { .column(3); }
+.col-4 { .column(4); }
+.col-5 { .column(5); }
+.col-6 { .column(6); }
+.col-7 { .column(7); }
+.col-8 { .column(8); }
+.col-9 { .column(9); }
+.col-10 { .column(10); }
+.col-11 { .column(11); }
+.col-12 { .column(12); }
+
+// Pull from right side of parent element
+.pull-1 { .pull(1) }
+.pull-2 { .pull(2) }
+.pull-3 { .pull(3) }
+.pull-4 { .pull(4) }
+.pull-5 { .pull(5) }
+.pull-6 { .pull(6) }
+.pull-7 { .pull(7) }
+.pull-8 { .pull(8) }
+.pull-9 { .pull(9) }
+.pull-10 { .pull(10) }
+.pull-11 { .pull(11) }
+
+// Push from left side of parent element
+.push-1 { .push(1) }
+.push-2 { .push(2) }
+.push-3 { .push(3) }
+.push-4 { .push(4) }
+.push-5 { .push(5) }
+.push-6 { .push(6) }
+.push-7 { .push(7) }
+.push-8 { .push(8) }
+.push-9 { .push(9) }
+.push-10 { .push(10) }
+.push-11 { .push(11) }
+
+
+

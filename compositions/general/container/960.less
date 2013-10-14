@@ -1,0 +1,70 @@
+//
+// container.responsive.960.less
+//
+// created: 5.5.2012
+// author: Petr Juna
+//
+// SWITCHERS: @nav-position, @aside-position, @columns, @min-width
+//
+
+.container960 (@_,auto) {
+    .column (9);
+}
+
+.container960 (@_,false)  {
+    .column (@columns);
+    float: left;
+    display: block;
+}
+
+.container960 (auto,right) {
+    @k: @columns - 3;
+    .column (@k);
+}
+
+.container960 (auto,left) {
+    @k: @columns - 3;
+    .column (@k);
+}
+
+.container960 (left, left) {
+    @k: @columns - 3;
+    .column (@k);
+    .push (3);
+    display: block;
+    float: none;
+    overflow:hidden;
+}
+
+.container960(left,right) {
+    @k: @columns - 6;
+    .column (@k);
+    float:left;
+}
+
+.container960(left,false) {
+    @k: @columns - 3;
+    .column (@k);
+    float:left;
+}
+
+.container960(top,left) {
+    @k: @columns - 3;
+    .column (@k);
+}
+
+.container960 (top,right) {
+    @k: @columns - 3;
+    .column (@k);
+}
+
+.container960 (top,top) { .column (12); }
+
+.container960 (right,left) { .column (6); }
+
+.container960 (right,false) { .column (9); }
+
+.container960 (right,right) { .column (9); }
+
+.container960(@_,@_) {
+}

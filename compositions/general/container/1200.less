@@ -1,0 +1,91 @@
+//
+// container.responsive.1200.less
+//
+// created: 5.5.2012
+// author: Petr Juna
+//
+// SWITCHERS: @nav-position, @aside-position, GRID
+//
+
+.container1200 (auto,auto){
+    .push(3);
+
+// Position helpers
+
+    position: absolute;
+    top:0;
+
+//@TODO: Ne příliš dobré řešení, které současné CSS neumožňuje. Bylo nutné si dopomoci javascriptem
+}
+
+.container1200 (auto,right){
+    @k: @columns - 3;
+    .column (@k);
+    .push(3);
+    .pull(3);
+    display: block;
+    float: none;
+    overflow: hidden;
+}
+
+.container1200 (auto,left){
+    .push(3);
+    .column(12);
+    display: block;
+    float:none;
+    overflow: hidden;
+}
+
+.container1200 (left,left){
+    .push(3);
+    .column(12);
+    display: block;
+    float:none;
+    overflow: hidden;
+}
+
+.container1200 (auto,false){
+    .push(3);
+    .column(12);
+}
+
+.container1200 (left,right){
+    .push(3);
+    .column(9);
+    display: block;
+    float:none;
+    overflow: hidden;
+}
+
+.container1200(@_,@_) {
+
+}
+
+.container1200(left,false){
+    .push(3);
+    .column(12);
+    display: inline-block;
+    float:none;
+    overflow: hidden;
+}
+
+.container1200 (top,left){
+    .column(@columns);
+    display: block;
+}
+
+.container1200 (top,false){
+    .column(15);
+    display: block;
+}
+
+.container1200 (top,top){
+    .column(15);
+    display: block;
+}
+
+.container1200 (right,left) { .column(9); }
+
+.container1200 (right,false) { .column(12); }
+
+.container1200 (right,right) { .column(12); }

@@ -1,0 +1,24 @@
+//
+// ./composition/flexible/media.less
+//
+// Media query composer.
+//
+
+.media-query (@min-width, @max-width) {
+    @media (min-width:@min-width) and (max-width:@max-width) {
+        .container { .container-ticker (@layout-type, @min-width); }
+        .header { .header-ticker(@layout-type,@min-width); }
+        .nav {
+            .nav-ticker(@layout-type, @min-width);
+            position: @menu-fixing;
+        }
+        .aside {
+            .aside-ticker(@layout-type,@min-width);
+            .aside(@nav-position, @aside-position )
+        }
+        .footer {
+            .footer-ticker(@layout-type,@min-width);
+            .footer(@nav-position, @aside-position, @min-width);
+        }
+    }
+}

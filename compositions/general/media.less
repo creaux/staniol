@@ -1,0 +1,13 @@
+//
+// ./composition/flexible/media.less
+//
+// Media query composer.
+//
+
+.media-query (@min-width, @max-width) {
+    @media (min-width:@min-width) and (max-width:@max-width) {
+        .content {
+            .content-ticker( @layout-type, @min-width );
+        }
+    }
+}

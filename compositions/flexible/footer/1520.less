@@ -1,0 +1,64 @@
+//
+// 1520.less
+//
+// created: 5.5.2012
+// author: Petr Juna
+//
+// SWITCHERS: @nav-position, @aside-position, GRID
+//
+
+//
+// Setting
+//
+// @nav-position:   auto;
+// @aside-position: right;
+//
+
+.footer1520(@_,@_) {
+    .column(19);
+    float: left;
+    display:inline;
+    margin-top:1em;
+}
+
+.footer1520(auto, left) {
+    .column(19);
+    margin-top: 1em;
+    display: inline;
+    float:left
+}
+
+.footer1520(auto,right) {
+    .column(19);
+    float: none;
+    display:block;
+    margin-top:1em;
+}
+
+.footer1520(auto,false) {
+    .column(19);
+    float: none;
+    display:block;
+    margin-top:1em;
+}
+
+.footer1520(auto, left) {
+    .column(19);
+    margin-top: 1em;
+    display: inline;
+    float:left
+}
+
+.footer1520(left,right) {
+    .column(19);
+    float: none;
+    display:block;
+    margin-top:1em;
+}
+
+.footer1520(left,false) {
+    .column(19);
+    float: left;
+    display:inline;
+    margin-top:1em;
+}

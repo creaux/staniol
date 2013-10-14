@@ -1,0 +1,149 @@
+// ./config.less - Overloading default configuration of nub.
+
+//
+// config.less
+//
+// Defining variables and their default value. Predefining configuration of framework.
+//
+
+// ///////////////// //
+// A. Core           //
+// ///////////////// //
+
+// ///////////////// //
+// 1. Mixins         //
+// ///////////////// //
+
+// Border type
+// values: str(solid,) //TODO: Doplnit
+// default: solid
+
+@border-type:solid;
+
+// Width of border
+// values: int
+// default: 1
+
+@border-width:1;
+
+// Border color
+// values: hexcolor
+// default: #000
+
+@border-color:#000;
+
+// ///////// //
+// 2. Colors //
+// ///////// //
+
+@white: #FFFFFF;
+@black: #000000;
+
+// Font family
+
+@font-family: "Avant", Arial, Helvetica, sans-serif;
+
+// Fix menu
+
+@menu-fixing:false;
+
+// Layout type
+
+@layout-type:responsive;
+
+// ///////////////// //
+// B. Components     //
+// ///////////////// //
+
+// ///////////////// //
+// 1. Vertical Rhytm //
+// ///////////////// //
+
+// Put On or Off vertical rhytm-component
+
+@vertical-rhythm: false;
+
+// Font size for html element
+// values: 16 (pixels)
+// default: 16 (eq 16px)
+
+@font-size: 16;
+
+// Defining line height
+// value: 20 (pixels)
+// default: 20
+
+@line-height: 20;
+
+// Wireframing stylesheets
+// values: true
+// default: true
+
+// ///////////////// //
+// 2. Wireframe      //
+// ///////////////// //
+
+@wireframe:false;
+
+// ///////////////// //
+// 3. Composition    //
+// ///////////////// //
+
+// Composition
+// Define how be layout composed
+// values: flexible, ridge
+
+@composition:false;
+
+// .nav position
+// values: auto, left, top, right
+// default: auto
+
+@nav-position:top;
+
+// .aside position
+// values: left, right, false, top
+// default: right
+
+@aside-position:top;
+
+// /////// //
+// 4. Grid //
+// /////// //
+
+@column-width: 290;
+@gutter-width: 15;
+@columns: 3;
+
+// ///////////////// //
+// 4. Layout setting //
+// ///////////////// //
+
+// Grid system
+// values: true, false
+// default: true
+
+@grid:false;
+
+@reset:false;
+
+// ///////////////// //
+// 5. Bootstrap      //
+// ///////////////// //
+
+// Bootstrap
+// Important!!!
+// When you set bootstrap to true you must set @grid to false.
+// values: true, false
+// default: false
+
+@bootstrap: true;
+
+// Boostrap modules
+@bootstrap-scaffolding: true;
+@bootstrap-type: true;
+@bootstrap-code: true;
+@bootstrap-grid: true;
+@bootstrap-tables: true;
+@bootstrap-forms: true;
+@bootstrap-buttons: true;
