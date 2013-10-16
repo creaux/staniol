@@ -1,5 +1,8 @@
 .grid(@grid) when (@grid = true) {
+    @import "constants";
     @import "grid";
 }
+
+.grid(@grid) when (@grid = false) { }
 
 .grid(@grid);

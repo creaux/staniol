@@ -34,41 +34,46 @@
 //
 // Border
 // Setting border via mixin with predefined color and styles
-// @border-width, @border-type, @border-color
+// @border-width, @border-style, @border-color
 //
 
 // Border top
-.border-top(@width:@border-width, @type:@border-type, @color:@border-color) {
-    border-top: @width*1px @type @color;
+.border-top(@width:@border-width, @style:@border-style, @color:@border-color) {
+    border-top: @width*1px @style @color;
 }
 
 // Border right
-.border-right(@width:@border-width, @type:@border-type, @color:@border-color) {
-    border-right: @width*1px @type @color;
+.border-right(@width:@border-width, @style:@border-style, @color:@border-color) {
+    border-right: @width*1px @style @color;
 }
 
 // Border bottom
-.border-bottom(@width:@border-width, @type:@border-type, @color:@border-color) {
-    border-bottom: @width*1px @type @color;
+.border-bottom(@width:@border-width, @style:@border-style, @color:@border-color) {
+    border-bottom: @width*1px @style @color;
 }
 
 // Border left
-.border-left(@width:@border-width, @type:@border-type, @color:@border-color) {
-    border-left: @width*1px @type @color;
+.border-left(@width:@border-width, @style:@border-style, @color:@border-color) {
+    border-left: @width*1px @style @color;
 }
 
 // Border
-.border(@width:@border-width, @type:@border-type, @color:@border-color) {
-    border: @width*1px @type @color;
+.border(@width:@border-width, @style:@border-style, @color:@border-color) {
+    border: @width*1px @style @color;
 }
 
 // Fonts
 // Font family
-//
 //
 
 .font-family(@font-family:@font-family) {
     font-family:@font-family;
 }
 
-//
+// Border box
+
+.border-box() {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
