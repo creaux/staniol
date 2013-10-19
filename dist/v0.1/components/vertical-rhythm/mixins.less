@@ -1,0 +1,22 @@
+// .font-size mixin define size in naturaly in pixels that are converted
+// to relative independet units rem
+// example: .font-size(32);
+
+.font-size-vr (@size: @font-size) {
+  font-size: 0px + @size;
+  font-size: 0rem + @size / @font-size;
+  line-height: 0 + round( @line-height / @size * 10000 ) / 10000;
+  margin-bottom: 0px + round( @line-height * @phi * 10000 ) / 10000;
+  margin-bottom: 0rem + round(( @line-height / @font-size ) * @phi * 10000) / 10000;
+}
+
+.font-size-lh (@size: @font-size) {
+  font-size: 0px + @size;
+  font-size: 0rem + @size / @font-size;
+  line-height: 0 + round(@line-height / @size*10000) / 10000;
+}
+
+.font-size (@size: @font-size) {
+  font-size: 0px + @size;
+  font-size: 0rem + @size / @font-size;
+}
