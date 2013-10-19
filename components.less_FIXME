@@ -1,0 +1,66 @@
+// //// //
+// Grid //
+// //// //
+
+// Grid system
+// values: true, false
+// default: true
+
+@grid:false;
+
+// Grid setting
+
+@column-width: 960;
+@gutter-width: 18;
+@columns: 12;
+
+@reset:false;
+
+// ////////////// //
+// Vertical Rhytm //
+// ////////////// //
+
+@vertical-rhythm: false;
+
+// Font size for html element
+// values: 16 (pixels)
+// default: 16 (eq 16px)
+
+@font-size: 16;
+
+// Defining line height
+// value: 20 (pixels)
+// default: 20
+
+@line-height: 20;
+
+// Wireframing stylesheets
+// values: true
+// default: true
+
+// ///////// //
+// Wireframe //
+// ///////// //
+
+@wireframe:false;
+
+// ///////// //
+// Bootstrap //
+// ///////// //
+
+// Bootstrap
+// Important!!!
+// When you set bootstrap to true you must set @grid to false.
+// values: ""
+// default: false
+
+@bootstrap: false;
+
+// Boostrap modules
+@bootstrap-scaffolding: true;
+@bootstrap-type: true;
+@bootstrap-code: true;
+@bootstrap-grid: true;
+@bootstrap-tables: true;
+@bootstrap-forms: true;
+@bootstrap-buttons: true;
