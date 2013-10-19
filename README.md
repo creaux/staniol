@@ -1,3 +1,5 @@
+=======
 Staniol
--------
-Base layout less css prototyping tool
+=======
+
+Wrapper for LESS CSS components and main mixin pack.
