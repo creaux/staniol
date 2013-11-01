@@ -7,15 +7,10 @@
 //
 
 .dummy(@width, @height) {
-    background-color:@gray;
+    background: url("http://placehold.it/@{width}x@{height}");
     width: @width*1px;
     height: @height*1px;
     display: block;
-}
-
-.dummy(@width, @height) when (@width = 100%) {
-    max-width:@width;
-    width:auto;
 }
 
 //
@@ -82,38 +77,3 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-// Text shadow
-
-.text-shadow(@x:@text-shadow-x, @y:@text-shadow-y, @blur:@text-shadow-blur, @color:@text-shadow-color) {
-    @ax:@x*1px;
-    @ay:@y*1px;
-    @ablur:@blur*1px;
-    text-shadow: @ax @ay @ablur @color;
-    -moz-text-shadow: @ax @ay @ablur @color;
-}
-
-// Impression
-
-.impression(@font-color:@impression-font-color, @background-color:@impression-background-color) {
-    @impression-color: darken(@background-color, 50%);
-    background-color:@background-color;
-    .text-shadow(-1, -1, 1, @impression-color);
-    color:@font-color;
-}
-
-// Button
-
-.button(@color:@button-color, @background-color:@button-background-color) {
-    background-color:@background-color;
-    color:@color;
-    @darker: darken(@background-color, 50%);
-    @lighter: lighten(@background-color, 50%);
-    .border-right(1, solid, @darker);
-    .border-bottom(1, solid, @darker);
-    .border-top(1, solid, @lighter);
-    .border-left(1, solid, @lighter);
-}
-
-// Button with icon
-
-//TODO: Button with ico

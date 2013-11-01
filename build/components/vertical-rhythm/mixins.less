@@ -3,20 +3,38 @@
 // example: .font-size(32);
 
 .font-size-vr (@size: @font-size) {
-  font-size: 0px + @size;
-  font-size: 0rem + @size / @font-size;
-  line-height: 0 + round( @line-height / @size * 10000 ) / 10000;
-  margin-bottom: 0px + round( @line-height * @phi * 10000 ) / 10000;
-  margin-bottom: 0rem + round(( @line-height / @font-size ) * @phi * 10000) / 10000;
+
+  //
+  // Calculate golden-ratio typography
+  // based on: http://www.pearsonified.com/2011/12/golden-ratio-typography.php
+  //
+  // It means that it calculates typography for specific element
+  // in the best graphical ratio between line width and font size
+  //
+  // args:
+  // int @size
+  //
+
+  @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+  @optimal-line-height: @size * @koeficient * 1px;
+  @margin: .5em;
+
+  font-size: 1px * @size;
+  font-size: 1rem * @size / @font-size;
+  line-height: round( @optimal-line-height * 10000 ) / 10000;
+  margin-top: @margin;
+  margin-bottom: @margin;
 }
 
 .font-size-lh (@size: @font-size) {
-  font-size: 0px + @size;
-  font-size: 0rem + @size / @font-size;
-  line-height: 0 + round(@line-height / @size*10000) / 10000;
+  @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+  @optimal-line-height: @size * @koeficient * 1px;
+  font-size: 1px * @size;
+  font-size: 1rem * @size / @font-size;
+  line-height: round(@optimal-line-height / @size*10000) / 10000;
 }
 
 .font-size (@size: @font-size) {
-  font-size: 0px + @size;
-  font-size: 0rem + @size / @font-size;
+  font-size: 1px * @size;
+  font-size: 1rem * @size / @font-size;
 }

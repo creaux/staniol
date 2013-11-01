@@ -8,8 +8,10 @@
 //
 
 .vertical-rhythm(@vertical-rhythm) when (@vertical-rhythm = true) {
-    @import "common";
-    @import "mixins";
+    @import "variables.less";
+    @import "common.less";
+    @import "mixins.less";
+    @import "elements.less";
 }
 
 .vertical-rhythm(@vertical-rhythm) when (@vertical-rhythm = false) {}

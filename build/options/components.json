@@ -1,5 +1,16 @@
 {
-    'bootstrap' : {
-
+    "grid":{
+        "variables":{
+            "column-width":"int",
+            "gutter-width":"int",
+            "columns":"int"
+        }
+    },
+    "vertical-rhythm":{
+        "variables":{
+            "font-size":"int"
+        }
     }
+
+
 }

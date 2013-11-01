@@ -1,0 +1,25 @@
+{
+  "name": "staniol",
+  "version": "0.1",
+  "homepage": "https://github.com/creaux/staniol",
+  "authors": [
+    "Petr Juna <petr.juna@gmail.com>"
+  ],
+  "description": "Wrapper for LESS CSS components.",
+  "main": "?",
+  "keywords": [
+    "staniol",
+    "less",
+    "css",
+    "boilerplate",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
