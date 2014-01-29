@@ -1,0 +1,191 @@
+// .font-size mixin define size in naturaly in pixels that are converted
+// to relative independet units rem
+// example: .font-size(32);
+
+.font-size-vr (@size: @font-size/*, @class */) {
+
+  //
+  // Calculate golden-ratio typography
+  // based on: http://www.pearsonified.com/2011/12/golden-ratio-typography.php
+  //
+  // It means that it calculates typography for specific element
+  // in the best graphical ratio between line width and font size
+  //
+  // args:
+  // int @size
+  //
+
+  //@width:`document.getElementsByClassName(@{class}).offsetWidth`;
+  @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+  @optimal-line-height: @size * @koeficient * 1px;
+  @margin: .5em;
+
+  font-size: 1px * @size;
+  font-size: 1rem * @size / @font-size;
+  line-height: round( @optimal-line-height * 10000 ) / 10000;
+  margin-top: @margin;
+  margin-bottom: @margin;
+}
+
+.font-size-lh (@size: @font-size/*, @class*/) {
+  //@width:`document.getElementsByClassName("@{class}").offsetWidth`;
+  @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+  @optimal-line-height: @size * @koeficient * 1px;
+  font-size: 1px * @size;
+  font-size: 1rem * @size / @font-size;
+  line-height: round(@optimal-line-height / @size*10000) / 10000;
+}
+
+.font-size (@size: @font-size) {
+  font-size: 1px * @size;
+  font-size: 1rem * @size / @font-size;
+}
+//
+// Inline element vertical-rhythm
+// Define margins to element that has defined height by content font-size
+
+
+.inline-block-vr(@size: @font-size, @height: @font-size) when (@size > @height) {
+    @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+    @optimal-line-height: @size * @koeficient * 1px;
+    height:@height*1px;
+    margin-bottom:((@optimal-line-height/2) - @size + @height)*1px;
+}
+
+.inline-block-vr(@size: @font-size, @height: @font-size) when (@size < @height) {
+    @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+    @optimal-line-height: @size * @koeficient * 1px;
+    height:@height*1px;
+    margin-bottom:((@optimal-line-height/2) + @size - @height)*1px;
+}
+
+.inline-block-vr(@size: @font-size, @height: @font-size) when (@size = @height) {
+    @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+    @optimal-line-height: @size * @koeficient * 1px;
+    height:@height*1px;
+    margin-bottom:(@height - (@optimal-line-height/2))*1px;
+}
+
+//
+// Box creator with vertical-rhytm rules
+//
+
+// .box-vr define wrapper for vertical-rhytm
+// to relative independet units rem
+// example: .font-size(32);
+
+
+.box-vr(@symetry:false, @size:1rem) when (@symetry = false) {
+    padding-top:@size;
+    margin-top:@size;
+    margin-bottom:@size;
+    padding-bottom:@size;
+
+    //
+    // Grid compatibility layer
+    //
+
+    & .row {
+        /*[class=\!box-vr] TODO: Add condition not box-vr class */
+        & ~ * *.box-vr,
+        & ~ *.box-vr {
+            padding-top:0;
+            margin-bottom:0;
+            padding-bottom:0;
+        }
+    }
+
+    //
+    // Typography layer
+    //
+
+    & .row {
+        & ~ h1,
+        & ~ h2,
+        & ~ h3,
+        & ~ h4,
+        & ~ h5,
+        & ~ h6 { //TODO: Add whole typography
+            margin-bottom:0;
+        }
+
+        & ~ * h1,
+        & ~ * h2,
+        & ~ * h3,
+        & ~ * h4,
+        & ~ * h5,
+        & ~ * h6  {
+
+        }
+    }
+
+    & > h1:first-child,
+    & > h2:first-child,
+    & > h3:first-child,
+    & > h4:first-child,
+    & > h5:first-child,
+    & > h6:first-child { //TODO: Add whole typography
+        margin-top:0;
+    }
+
+    & > h1:only-child,
+    & > h2:only-child,
+    & > h3:only-child,
+    & > h4:only-child,
+    & > h5:only-child,
+    & > h6:only-child {
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    //
+    // Form layer
+    //
+
+    &[type=text] {
+        margin-top:0;
+        margin-bottom:0;
+        padding-top:@size/2;
+        padding-bottom:@size/2;
+
+        & + input[type=submit] {
+            margin-top:0;
+            margin-bottom:0;
+            padding-top:@size/2;
+            padding-bottom:@size/2;
+        }
+    }
+}
+
+.box-vr(@symetry:false, @size:1rem) when (@symetry = true) {
+    padding:@size;
+    margin:@size;
+
+    //
+    // Form layer
+    //
+
+    &[type=text] {
+        margin-top:0;
+        margin-right:0;
+        margin-bottom:0;
+        margin-left:0;
+        padding-top:@size/2;
+        padding-right:@size/2;
+        padding-bottom:@size/2;
+        padding-left:@size/2;
+
+        & + input[type=submit], & + input[type=submit] + input[type=submit] {
+            margin-top:0;
+            margin-right:0;
+            margin-bottom:0;
+            margin-left:0;
+            padding-top:@size/2;
+            padding-right:@size/2;
+            padding-bottom:@size/2;
+            padding-left:@size/2;
+        }
+    }
+}
+
+.box-vr { .box-vr(); }
