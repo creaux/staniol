@@ -1,0 +1,22 @@
+{
+    "grid" : {
+        "value" : true,
+        "variables" : {
+            "column-width" : 960,
+            "gutter-width" : 18,
+            "columns" : 12
+        }
+    },
+    "reset" : true,
+    "vertical-rhythm" : {
+        "value" : true,
+        "variables" : {
+            "font-size" : 16,
+            "line-height" : 1
+        }
+    },
+    "wireframe" : true,
+    "typography" : true,
+    "buttons" : true,
+    "bootstrap" : false
+}
