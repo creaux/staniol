@@ -51,18 +51,17 @@ task('default', ['dist'], function () {
         Staniol.Data.components = data.components;
         Staniol.Data.version = data.version;
 
-        Dist.Dir.version = path.join(Dist.Dir.path, "v" + Staniol.Data.version.toString());
-        Dist.Dir.components = path.join(Dist.Dir.version, Staniol.Dir.components);
-        Dist.Dir.core = path.join(Dist.Dir.version, Staniol.Dir.core);
+        Dist.Dir.components = path.join(Dist.Dir.path, Staniol.Dir.components);
+        Dist.Dir.core = path.join(Dist.Dir.path, Staniol.Dir.core);
 
         Dist.Data.variables = '';
-        Dist.File.components = path.join(Dist.Dir.version, 'components.less');
-        Dist.File.variables = path.join(Dist.Dir.version, 'variables.less');
+        Dist.File.components = path.join(Dist.Dir.path, 'components.less');
+        Dist.File.variables = path.join(Dist.Dir.path, 'variables.less');
 
-        jake.mkdirP(Dist.Dir.version);
+        jake.mkdirP(Dist.Dir.path);
         jake.cpR(Build.Dir.components, Dist.Dir.components);
         jake.cpR(Build.Dir.core, Dist.Dir.core);
-        jake.cpR(Build.Dir.loader, Dist.Dir.version);
+        jake.cpR(Build.Dir.loader, Dist.Dir.path);
 
         /**
          * Creating dist/{version}/components/init.less
@@ -73,7 +72,7 @@ task('default', ['dist'], function () {
             for (var i = 0; i <= data.length; i++) {
                 componentsInitFileContent = componentsInitFileContent.concat('@import '+'"'+data[i]+'/init.less"'+";\r\n");
             }
-            fs.writeFile('dist/v'+Staniol.Data.version+'/components/init.less', componentsInitFileContent, function(err) { if(err) { console.log(err); }});
+            fs.writeFile('dist/components/init.less', componentsInitFileContent, function(err) { if(err) { console.log(err); }});
         });
 
         fs.readFile(Build.Dir.componentsConfig, 'utf8', function (err, data) {
@@ -116,6 +115,12 @@ task('default', ['dist'], function () {
             fs.writeFile(Dist.File.variables, Dist.Data.variables, function(err) { if(err) { console.log(err); }});
         });
     });
+});
 
+desc('Create and checks for min folder.');
+directory('min');
 
+desc('Get version of actual distribution.');
+task('minimal', ['min'], function () {
+    //TODO: Create minimalistic version of Staniol staniol.min.less
 });
