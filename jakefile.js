@@ -30,7 +30,7 @@ task('default', ['dist'], function () {
     Build.Dir.componentsConfig = path.join(Build.Dir.path, Staniol.Dir.componentsFile);
     Build.Dir.variablesConfig = path.join(Build.Dir.path, Staniol.Dir.variablesFile);
 
-    Build.Dir.loader = path.join(Build.Dir.path, 'loader', 'staniol.less');
+    Build.Dir.loader = path.join(Build.Dir.path, 'staniol.json');
 
     Dist.Dir = {};
     Dist.File = {};
@@ -46,6 +46,7 @@ task('default', ['dist'], function () {
 
         data = JSON.parse(data);
         name = data.name;
+
         Staniol.Data.version = data.version;
         Staniol.Data.variables = data.variables;
         Staniol.Data.components = data.components;
@@ -59,9 +60,11 @@ task('default', ['dist'], function () {
         Dist.File.variables = path.join(Dist.Dir.path, 'variables.less');
 
         jake.mkdirP(Dist.Dir.path);
-        jake.cpR(Build.Dir.components, Dist.Dir.components);
+        //jake.cpR(Build.Dir.components, Dist.Dir.components);
         jake.cpR(Build.Dir.core, Dist.Dir.core);
-        jake.cpR(Build.Dir.loader, Dist.Dir.path);
+        jake.mkdirP('dist/components'); //TODO: Vars
+
+        //jake.cpR(Build.Dir.loader, Dist.Dir.path);
 
         /**
          * Creating dist/{version}/components/init.less
@@ -69,12 +72,13 @@ task('default', ['dist'], function () {
         fs.readdir('build/components', function(err, data) {
             if (err) throw err;
             var componentsInitFileContent = '';
-            for (var i = 0; i <= data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 componentsInitFileContent = componentsInitFileContent.concat('@import '+'"'+data[i]+'/init.less"'+";\r\n");
             }
             fs.writeFile('dist/components/init.less', componentsInitFileContent, function(err) { if(err) { console.log(err); }});
         });
 
+        // components.less & select good components
         fs.readFile(Build.Dir.componentsConfig, 'utf8', function (err, data) {
             if (err) {
                 console.log('Error: ' + err);
@@ -83,16 +87,20 @@ task('default', ['dist'], function () {
 
             data = JSON.parse(data);
 
+            // Check if component exists
             for (var component in data) {
-                if (typeof data[component] === "boolean") {
-                    var bool = component;
-                    if (bool) Dist.Data.components = Dist.Data.components.concat('@'+component+': '+data[component]+";\r\n");
-                } else {
-                    if (data[component]['value']) {
-                        for (var variable in data[component]['variables']) {
-                            Dist.Data.components =
-                                Dist.Data.components.concat('@'+variable+': '+data[component]['variables'][variable]+";\r\n");
-                        }
+                // Select and copy appropriate component
+                var buildPath = path.join(Build.Dir.components, component);
+                var distPath = path.join(Dist.Dir.components, component);
+                if (typeof data[component] === "boolean" && data[component] == true) jake.cpR(buildPath, distPath);
+                // components.less
+                if (typeof data[component]['value'] === "boolean" && data[component]['value'] == true) {
+                    // Select and copy appropriate component (component which have variables)
+                    jake.cpR(buildPath, distPath);
+
+                    for (var variable in data[component]['variables']) {
+                        Dist.Data.components =
+                            Dist.Data.components.concat('@'+variable+': '+data[component]['variables'][variable]+";\r\n");
                     }
                 }
             }
@@ -100,6 +108,7 @@ task('default', ['dist'], function () {
             fs.writeFile(Dist.File.components, Dist.Data.components, function(err) { if(err) { console.log(err); }});
         });
 
+        // variables.less
         fs.readFile(Build.Dir.variablesConfig, 'utf8', function (err, data) {
             if (err) {
                 console.log('Error: ' + err);
@@ -114,6 +123,25 @@ task('default', ['dist'], function () {
 
             fs.writeFile(Dist.File.variables, Dist.Data.variables, function(err) { if(err) { console.log(err); }});
         });
+
+        // staniol.less
+        fs.readFile(Build.Dir.loader, 'utf8', function (err, data) {
+            if (err) {
+                console.log('Error: ' + err );
+            }
+
+            data = JSON.parse(data);
+            var path = require('path');
+
+            Dist.File.loader = path.join(Dist.Dir.path, 'loader.less');
+            Dist.Data.loader = '';
+
+            for (var loader in data) {
+                Dist.Data.loader = Dist.Data.loader.concat('@import "' + data[loader] + '";');
+            }
+
+            fs.writeFile(Dist.File.loader, Dist.Data.loader, function(err) { if(err) { console.log(err); }});
+        });
     });
 });
 
@@ -122,5 +150,17 @@ directory('min');
 
 desc('Get version of actual distribution.');
 task('minimal', ['min'], function () {
+
+    var fs = require('fs')
+      , Parser = require('lessmin').Parser
+      , parser = new Parser();
+
+    parser.parse({
+        minimize : true,
+        input : 'dist/loader.less',
+        callback : function(data) {
+            fs.writeFile('min/staniol.min.less', data, function(err) { if(err) { console.log(err); }})
+        }
+    });
     //TODO: Create minimalistic version of Staniol staniol.min.less
 });

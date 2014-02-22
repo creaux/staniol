@@ -16,7 +16,5 @@
         }
     },
     "wireframe" : true,
-    "typography" : true,
-    "buttons" : true,
-    "bootstrap" : false
+    "typography" : true
 }

@@ -16,7 +16,7 @@
   //
 
   //@width:`document.getElementsByClassName(@{class}).offsetWidth`;
-  @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+  @koeficient: pi() - (((1/(2*pi()))*(1 - ( 400/((@size*pi()) * (@size*pi())))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
   @optimal-line-height: @size * @koeficient * 1px;
   @margin: .5em;
 
@@ -29,7 +29,7 @@
 
 .font-size-lh (@size: @font-size/*, @class*/) {
   //@width:`document.getElementsByClassName("@{class}").offsetWidth`;
-  @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+  @koeficient: pi() - (((1/(2*pi()))*(1 - ( 400/((@size*pi()) * (@size*pi())))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
   @optimal-line-height: @size * @koeficient * 1px;
   font-size: 1px * @size;
   font-size: 1rem * @size / @font-size;
@@ -46,21 +46,21 @@
 
 
 .inline-block-vr(@size: @font-size, @height: @font-size) when (@size > @height) {
-    @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+    @koeficient: pi() - (((1/(2*pi()))*(1 - ( 400/((@size*pi()) * (@size*pi())))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
     @optimal-line-height: @size * @koeficient * 1px;
     height:@height*1px;
     margin-bottom:((@optimal-line-height/2) - @size + @height)*1px;
 }
 
 .inline-block-vr(@size: @font-size, @height: @font-size) when (@size < @height) {
-    @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+    @koeficient: pi() - (((1/(2*pi()))*(1 - ( 400/((@size*pi()) * (@size*pi())))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
     @optimal-line-height: @size * @koeficient * 1px;
     height:@height*1px;
     margin-bottom:((@optimal-line-height/2) + @size - @height)*1px;
 }
 
 .inline-block-vr(@size: @font-size, @height: @font-size) when (@size = @height) {
-    @koeficient: @phi - (((1/(2*@phi))*(1 - ( 400/((@size*@phi) * (@size*@phi)))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
+    @koeficient: pi() - (((1/(2*pi()))*(1 - ( 400/((@size*pi()) * (@size*pi())))))); //TODO: WIDTH: 400px evaluate javascript; For now 400px is in the middle of usually used widths
     @optimal-line-height: @size * @koeficient * 1px;
     height:@height*1px;
     margin-bottom:(@height - (@optimal-line-height/2))*1px;

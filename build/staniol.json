@@ -1,0 +1,6 @@
+{
+    "variables" : "variables",
+    "core" : "core/init",
+    "setting" : "components",
+    "components" : "components/init"
+}
