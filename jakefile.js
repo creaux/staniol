@@ -162,5 +162,4 @@ task('minimal', ['min'], function () {
             fs.writeFile('min/staniol.min.less', data, function(err) { if(err) { console.log(err); }})
         }
     });
-    //TODO: Create minimalistic version of Staniol staniol.min.less
 });
