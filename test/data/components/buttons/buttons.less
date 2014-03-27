@@ -1,0 +1,12 @@
+// Button
+
+.button(@color:@button-color, @background-color:@button-background-color) {
+    background-color:@background-color;
+    color:@color;
+    @darker: darken(@background-color, 50%);
+    @lighter: lighten(@background-color, 50%);
+    .border-right(1, solid, @darker);
+    .border-bottom(1, solid, @darker);
+    .border-top(1, solid, @lighter);
+    .border-left(1, solid, @lighter);
+}

@@ -1,0 +1,35 @@
+// Fonts
+// Font family
+//
+
+.font-family(@font-family:@font-family) {
+    font-family:@font-family;
+}
+
+// Text shadow
+
+.text-shadow(@x:@text-shadow-x, @y:@text-shadow-y, @blur:@text-shadow-blur, @color:@text-shadow-color) {
+    @ax:@x*1px;
+    @ay:@y*1px;
+    @ablur:@blur*1px;
+    text-shadow: @ax @ay @ablur @color;
+    -moz-text-shadow: @ax @ay @ablur @color;
+}
+
+// Impression
+
+.impression(@font-color:@impression-font-color, @background-color:@impression-background-color) {
+    @impression-color: darken(@background-color, 50%);
+    background-color:@background-color;
+    .text-shadow(-1, -1, 1, @impression-color);
+    color:@font-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family:@font-family;
+    color:@headline-color;
+}
+
+p {
+    font-family:@font-family;
+}

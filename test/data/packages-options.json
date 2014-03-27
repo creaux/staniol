@@ -1,0 +1,10 @@
+{
+    "packages" : {
+        "grid" : {
+            "path" : "../build/components/grid/staniol.json"
+        },
+        "border" : {
+            "path" : "../build/components/border/staniol.json"
+        }
+    }
+}

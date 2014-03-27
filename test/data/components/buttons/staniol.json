@@ -1,0 +1,5 @@
+{
+    "main" : "buttons",
+    "button-color" : "@white",
+    "button-background-color" : "@red"
+}

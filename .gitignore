@@ -3,3 +3,4 @@ staniol.iml
 /.svn/
 node_modules
 atlassian-ide-plugin.xml
+deploy/

@@ -1,0 +1,8 @@
+{
+    "main" : "init.less",
+    "variables" : {
+        "column-width" : 960,
+        "gutter-width" : 18,
+        "columns" : 12
+    }
+}

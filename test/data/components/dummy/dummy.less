@@ -1,0 +1,18 @@
+//
+// Dummy represent scale model of specificaly sized image
+// Mixin is base on popular http://placehold.it/ solution
+// arguments: width, height
+// data: int, int
+//
+
+.dummy(@width, @height) {
+    background-color:@gray;
+    width: @width*1px;
+    height: @height*1px;
+    display: block;
+}
+
+.dummy(@width, @height) when (@width = 100%) {
+    max-width:@width;
+    width:auto;
+}
