@@ -15,7 +15,7 @@ staniol.Install = function () {
     var options = arguments[0] || undefined,
         bundle = options.bundle || undefined,
         config = options.config || undefined,
-        directory = options.directory || undefined,
+        directory = options.directory || 'staniol_components',
         type = options.type || 'bower';
 
     // /////////////// //
@@ -29,7 +29,7 @@ staniol.Install = function () {
         var bower = new Bower (bundle, config, directory);
         bower.install (function() {
             console.log('Package: ' + bundle + ' has been installed');
-            onInstall();
+            if (typeof onInstall === "function") onInstall();
         });
     }
 

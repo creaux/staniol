@@ -17,7 +17,7 @@ staniol.Bower = function () {
     "use strict";
 
     var commands = bower.commands,
-        pack = arguments[0] || undefined,
+        bundle = arguments[0] || undefined,
         config = arguments[1] || {},
         directory = arguments[2] || 'staniol_components',
         cwd;
@@ -30,7 +30,7 @@ staniol.Bower = function () {
     }
 
     function isStaniol(callback) {
-        commands.info(pack).on('end', function(info) {
+        commands.info(bundle).on('end', function(info) {
             var main = info.latest.main;
             var length = main.length;
             var state;
@@ -50,7 +50,7 @@ staniol.Bower = function () {
     function install(callback) {
         isStaniol(function() {
             dir();
-            commands.install([pack], config, { directory : directory, cwd : cwd})
+            commands.install([bundle], config, { directory : directory, cwd : cwd})
                 .on('end', function () {
                     callback();
                 }

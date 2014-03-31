@@ -9,109 +9,94 @@ if (staniol !== undefined) {
 
 staniol.packages = {};
 
+// Declaration of simple Interface
+var simple = new helper.Interface('template', ['packages']);
+var multiple = new helper.Interface('template', ['packages']);
+
+// Simple interface template
+staniol.packages.simple = {
+    packages : Array
+};
+
 /**
  * Package setting
  */
-staniol.packages.Setting = function (jsonFile) {
+staniol.packages.Packages = function () {
     "use strict";
-    var configFile,
-        config,
-        main = null,
-        variables = {};
 
-    /**
-     * Set config file
-     * @param setConfigFile
-     */
+    // /////////////// //
+    // Private members //
+    // /////////////// //
 
-    function setConfigFile(sConfigFile) {
-        configFile = sConfigFile;
-    }
+    var data = arguments[0];
 
-    function getConfigFile() {
-        return configFile;
-    }
+    // ////////////////// //
+    // Privileged members //
+    // ////////////////// //
+    this.packages = data;
 
-    /**
-     * Set variables of package
-     */
-    function setVariables(sVariables) {
-        variables = sVariables;
-    }
+    // Ensure implement of interface
+    helper.Interface.ensureImplements(this, simple);
+};
 
-    function getVariables() {
-        return variables;
-    }
+/**
+ * Subclass of staniol.setting.Packages Class
+ * Extending it with solution of parse file and processing its data
+ *
+ * @param input
+ * @returns {Function}
+ * @constructor
+ */
+staniol.packages.Process = function() {
+    "use strict";
 
-    /**
-     * Set main file
-     */
-    function setMain(sMain) {
-        if (setMain !== undefined) { main = sMain; }
-    }
+    // /////////////// //
+    // Private members //
+    // /////////////// //
 
-    function getMain() {
-        return main;
-    }
+    var that = this,
+        data,
+        json,
+        input = arguments[0];
 
     /**
      * Get config
      * @returns {*}
-     * @param setConfig
+     * @param data
      */
-    function setSetting(sConfig) {
-        try { config = JSON.parse(sConfig); }
-        catch(e) { throw Error('Error: File '+ sConfig + ' is not json.'); }
+    function setJson(data) {
+        try { json = JSON.parse(data); }
+        catch(e) { throw new Error('Unexpected token: '+ data + ', is not json.'); }
     }
+    function getJson() { return json; }
 
-    function getSetting() {
-        return config;
-    }
 
-    function verifySetting () { // TODO: Verify that setting file contain same model as template
-    }
 
-    function init(f) {
-        setConfigFile(f);
-        configFile = getConfigFile();
-        setSetting(configFile);
-        config = getSetting();
-    }
+    // ////////////////// //
+    // Privileged members //
+    // ////////////////// //
 
-    init(jsonFile);
-
-    //TODO: Check type of config and parse
-
-    this.Config = config;
-    return config;
-};
-
-/**
- * Subclass of staniol.setting.Setting Class
- * Extending it with solution of parse file and processing its data
- *
- * @param filepath
- * @returns {Function}
- * @constructor
- */
-staniol.packages.Process = function(filepath) {
-    "use strict";
-
-    var emitter = new EventEmitter(),
-        that = this;
-
-    fs.readFile(filepath, 'utf-8', function(err,d) {
-        staniol.packages.Process.superClass.constructor.call(that, d);
-        emitter.emit('onProcess');
-    });
-
-    this.parse = function(callback) {
-        emitter.on('onProcess', function() {
-            callback(that.Config);
-        });
+    this.parse = function() {
+        return this.packages;
     };
+
+    // ////////////// //
+    // Initialization //
+    // ////////////// //
+
+    // Check it is a data or object (file vs. {}) else raise error
+    if (fs.existsSync(input)) {
+        data = fs.readFileSync(input, 'utf-8');
+        setJson(data);
+        data = getJson();
+    }
+    else if (typeof input === 'object') data = input;
+    else throw new Error('Input format: ' + input + ' is not known.');
+
+    // Inheritance
+    staniol.packages.Process.superClass.constructor.call(that, data);
 };
 
-// Inheriting Setting to Process
-helper.extend(staniol.packages.Process, staniol.packages.Setting);
+// Inheriting Packages to Process
+helper.extend(staniol.packages.Process, staniol.packages.Packages);
 

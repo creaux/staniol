@@ -1,7 +1,7 @@
 var staniol
     , fs = require('fs')
     , path = require('path')
-    , Data = require('./data').Data
+    , ProcessBundle = require('./bundle').bundle.Process
     , Process = require('./packages').packages.Process
     , temp = require('temp')
     , temporary = require('temporary')
@@ -23,6 +23,8 @@ staniol.Composer = function () {
     // Private members
 
     var packagesfile = arguments[0] || undefined, // List of packages in json file
+        packages,
+        minify = false,
         emitter = new EventEmitter();
 
     /**
@@ -31,43 +33,21 @@ staniol.Composer = function () {
      * @callback onParsed
      */
     function parseJSON () {
-        var file = packagesfile;
-        fs.exists (file, function(bool) {
-            if (!bool) throw Error ('Package file: ' + file + ' is not exist.');
-            var process = new Process (file);
-            process.parse (function (packages) {
-                packages = packages.packages;
-                emitter.emit('parse', packages);
-            });
-        });
+        var process = new Process (packagesfile);
+        packages = process.parse ();
+        packages = packages.packages;
     }
-
-    /**
-     * This method processing a serving data to onLessData
-     * @callback onLessData
-     */
-    function onParsed () { //TODO: Control flow
-        emitter.on('parse', function (packages) {
-            if ( packages instanceof Array ) {
-                emitter.emit('bower', packages);
-            } else {
-                emitter.emit('file', packages);
-            }
-        });
-    }
-
 
     function onLess(onLessData) {
-        emitter.on('lessGet', function (dataobj) {
-            dataobj.less( function ( data ) {
-                onLessData ( data );
-            });
+        emitter.on('lessGet', function (bundle) {
+            var data = bundle.less();
+            onLessData ( data );
         });
     }
 
     function onVariables () {
-        emitter.on('lessGet', function (dataobj, pack) {
-            var variables = dataobj.variables();
+        emitter.on('lessGet', function (bundle) {
+            var variables = bundle.variables();
             emitter.emit('variablesGet', variables);
         });
     }
@@ -77,33 +57,29 @@ staniol.Composer = function () {
      * @callback onLessData
      */
     function onData() {
-        emitter.on('bower', function (pack) {
+        var pack = packages;
+        if ( packages instanceof Array ) {
                 temp.mkdir('staniol_components', function ( err, tempDir ) {
                     for (var i = 0; i < pack.length; i++) {
-                        var bundle = pack[i];
+                        var bundleName = pack[i];
                         var install = new Install({
-                            bundle : bundle,
+                            bundle : bundleName,
                             config : undefined,
                             directory : tempDir,
                             type : 'bower'
                         });
                         install.install(function() {
-                            var dataobj = new Data ( path.join( tempDir, bundle, 'staniol.json' ) );
-                            emitter.emit('lessGet', dataobj);
+                            var bundle = new ProcessBundle ( path.join( tempDir, bundleName, 'staniol.json' ) );
+                            emitter.emit('lessGet', bundle);
                         });
                     }
                 });
-        }).on('file', function (pack) {
+        } else {
             for ( var key in pack ) {
-                var dataobj = new Data(pack[key].path);
-                emitter.emit('lessGet', dataobj);
+                var bundle = new ProcessBundle(pack[key].path);
+                emitter.emit('lessGet', bundle);
             }
-        });
-    }
-
-    function init() {
-        parseJSON();
-        onParsed();
+        }
     }
 
     // ////////////////// //
@@ -143,11 +119,13 @@ staniol.Composer = function () {
     };
 
     this.variables = function () {
+        onData();
         onVariables();
         emitter.on('variablesGet', function (variables) {
-
+            console.log(variables);
         });
     };
 
-    init();
+    // Initialization
+    parseJSON();
 };
