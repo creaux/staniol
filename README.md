@@ -3,16 +3,14 @@ Staniol
 
 Packaging system for LESS CSS objects.
 
-Issues
-------
-- Not compiling value from components
+Usage
+-----
 
-"grid" : {
-        "value" : true,
-        "variables" : {
-            "column-width" : 960,
-            "gutter-width" : 18,
-            "columns" : 12
-        }
-    },
+Staniol is currently really alpha it means that functionality is really basic.
+
+Install staniol using node.js npm packaging system:
+`npm install -g staniol`
+
+Install package using staniol:
+`npm install [package]`
 

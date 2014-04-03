@@ -1,6 +1,6 @@
 {
   "name": "staniol",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "Package manager for less",
   "main": "staniol/index.js",
   "directories": {
@@ -14,8 +14,7 @@
     "lessmin": "~0.0.1-1",
     "temp": "~0.7.0",
     "minimist": "~0.0.8",
-    "should": "~3.2.0-beta1",
-    "temporary" : "~0.0.8"
+    "should": "~3.2.0-beta1"
   },
   "devDependencies": {
     "mocha": "~1.18.2"
