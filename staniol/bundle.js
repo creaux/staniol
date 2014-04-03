@@ -3,7 +3,6 @@ var staniol = {},
     path = require('path'),
     fs = require('fs'),
     Parser = require('lessmin').Parser,
-    EventEmitter = require('events').EventEmitter,
     helper = require('./_helpers').Helper;
 
 if (staniol !== undefined) {
