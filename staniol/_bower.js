@@ -1,6 +1,5 @@
 var staniol = {},
     bower = require('bower'),
-    wait = require('wait.for'),
     EventEmitter = require('events').EventEmitter,
     fs = require('fs'),
     path = require('path');

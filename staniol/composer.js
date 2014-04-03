@@ -3,7 +3,6 @@ var staniol
     , path = require('path')
     , Process = require('./packages').packages.Process
     , temp = require('temp')
-    , temporary = require('temporary')
     , helper = require('./_helpers').Helper
     , EventEmitter = require('events').EventEmitter
     , Install = require('./install').install.Bundle
