@@ -1,18 +1,15 @@
 {
-  "name": "staniol",
-  "version": "0.1",
-  "homepage": "https://github.com/creaux/staniol",
+  "name": "less-box-model-mixin",
+  "version": "0.0.1",
   "authors": [
     "Petr Juna <petr.juna@gmail.com>"
   ],
-  "description": "Wrapper for LESS CSS components.",
-  "main": "?",
+  "description": "Less box model mixin.",
+  "main": "box-model.less",
   "keywords": [
     "staniol",
     "less",
-    "css",
-    "boilerplate",
-    "bootstrap"
+    "css"
   ],
   "license": "MIT",
   "ignore": [

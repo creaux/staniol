@@ -1,7 +1,7 @@
 Staniol
 =======
 
-Wrapper for LESS CSS components and main mixin pack.
+Packaging system for LESS CSS objects.
 
 Issues
 ------

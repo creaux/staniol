@@ -11,12 +11,6 @@ staniol.packages = {};
 
 // Declaration of simple Interface
 var simple = new helper.Interface('template', ['packages']);
-var multiple = new helper.Interface('template', ['packages']);
-
-// Simple interface template
-staniol.packages.simple = {
-    packages : Array
-};
 
 /**
  * Package setting

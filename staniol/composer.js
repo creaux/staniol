@@ -1,13 +1,13 @@
 var staniol
     , fs = require('fs')
     , path = require('path')
-    , ProcessBundle = require('./bundle').bundle.Process
     , Process = require('./packages').packages.Process
     , temp = require('temp')
     , temporary = require('temporary')
     , helper = require('./_helpers').Helper
     , EventEmitter = require('events').EventEmitter
-    , Install = require('./install').Install;
+    , Install = require('./install').install.Bundle
+    , Components = require('./install').install.Components;
 
 if (staniol === undefined) {
     staniol = exports;
@@ -57,34 +57,40 @@ staniol.Composer = function () {
      * @callback onLessData
      */
     function onData() {
-        var pack = packages;
         if ( packages instanceof Array ) {
                 temp.mkdir('staniol_components', function ( err, tempDir ) {
-                    for (var i = 0; i < pack.length; i++) {
-                        var bundleName = pack[i];
-                        var install = new Install({
-                            bundle : bundleName,
-                            config : undefined,
-                            directory : tempDir,
-                            type : 'bower'
-                        });
-                        install.install(function() {
-                            var bundle = new ProcessBundle ( path.join( tempDir, bundleName, 'staniol.json' ) );
-                            emitter.emit('lessGet', bundle);
-                        });
-                    }
+                    var components = new Components({
+                            components : packages,
+                            directory : tempDir
+                    });
+                    components.prepare(function (bundle) {
+                        emitter.emit('lessGet', bundle);
+                    });
                 });
         } else {
-            for ( var key in pack ) {
-                var bundle = new ProcessBundle(pack[key].path);
+            var components = new Components({
+                components : packages
+            });
+            components.process(function (bundle) {
                 emitter.emit('lessGet', bundle);
-            }
+            });
         }
     }
 
     // ////////////////// //
     // Privileged members //
     // ////////////////// //
+
+    /**
+     * Install package to defined folder
+     */
+    this.install = function () {
+        packages = packages || undefined;
+        var components = new Components({
+            components : packages
+        });
+        components.install();
+    };
 
     /**
      * Method serving data to the callback as argument
@@ -97,31 +103,11 @@ staniol.Composer = function () {
         });
     };
 
-    /**
-     * Install package to defined folder
-     */
-    this.install = function () {
-        var directory = arguments[0] || undefined;
-
-        emitter.on('parse', function (packages) {
-            packages = packages || undefined;
-            for (var i = 0; i < packages.length; i++) {
-                var bundle = packages[i];
-                var install = new Install({
-                    bundle : bundle,
-                    config : undefined,
-                    directory : directory,
-                    type : 'bower'
-                });
-                install.install();
-            }
-        });
-    };
-
     this.variables = function () {
         onData();
         onVariables();
         emitter.on('variablesGet', function (variables) {
+            // TODO: onVariables
             console.log(variables);
         });
     };
